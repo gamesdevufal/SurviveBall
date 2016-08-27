@@ -19,10 +19,10 @@ function window_state()
 	end
 end
 
-function treat_mouse( x, y, button )
+function treat_mouse( x, y )
 	if game_state == 0 then
 		--See if the start button was clicked.
-		if button == "l" and 300 < x and x < 500 and 400 < y and y < 500 then
+		if 300 < x and x < 500 and 400 < y and y < 500 then
 			print("Star button clicked")
 			game_state = 1
 		end

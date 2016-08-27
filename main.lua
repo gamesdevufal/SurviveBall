@@ -7,8 +7,8 @@ game_state = 0
 
 --Na versao 0.10 love.mousepressed( x, y, button, istouch )
 --Get mouse event
-function love.mousepressed( x, y, button )
-	treat_mouse(x, y, button)
+function love.mousepressed()
+	treat_mouse(love.mouse.getX(), love.mouse.getY())
 end	
 
 function love.load()
