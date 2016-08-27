@@ -1,17 +1,13 @@
 --WindowID = 0 -> tela inicial, WindowID=2 -> tela de jogo 
 
-require 'window_initial'
-require 'window_game'
+require 'game_state'
 
 game_state = 0
-a = true
 
 --Na versao 0.10 love.mousepressed( x, y, button, istouch )
 --Get mouse event
 function love.mousepressed( x, y, button )
-	if game_state == 0 then
-		treat_mouse_0( x, y, button )
-	end
+	treat_mouse(x, y, button)
 end	
 
 function love.load()
@@ -30,18 +26,13 @@ end
 
 function love.draw()
 	-- Ask which is the current game state
-	if game_state == 1 then
-		window_game()
-	else
-		window_initial()
-	end
+	window_state()
 end
-
 
 function love.update(dt) 
 	-- Updating time
 	next_time = next_time + min_dt
 	
 	-- Updating all the rest
-	treat_keyboard_1()
+	treat_keyboard()
 end
