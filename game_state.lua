@@ -3,6 +3,7 @@ function window_state()
 	if game_state == 0 then
 		--Draw the start button.
 		love.graphics.rectangle( "fill", 300, 400, 200, 100)
+
 	elseif game_state == 1 then
 			-- Timer management
 		local cur_time = love.timer.getTime()
@@ -13,7 +14,8 @@ function window_state()
 		love.timer.sleep(next_time - cur_time)	
 		
 		-- Drawing stuff
-		love.graphics.rectangle( "fill", player.posX, player.posY, player.width, player.height)	
+		love.graphics.rectangle( "fill", player.posX, player.posY, player.width, player.height)
+		balls_factory()
 	end
 end
 

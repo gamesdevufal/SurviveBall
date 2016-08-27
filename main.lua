@@ -1,6 +1,7 @@
 --WindowID = 0 -> tela inicial, WindowID=2 -> tela de jogo 
 
 require 'game_state'
+require 'ball'
 
 game_state = 0
 
@@ -35,4 +36,5 @@ function love.update(dt)
 	
 	-- Updating all the rest
 	treat_keyboard()
+	balls_move()
 end
