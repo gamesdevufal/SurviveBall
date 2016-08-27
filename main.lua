@@ -22,7 +22,7 @@ function love.load()
 	next_time = love.timer.getTime()
 
 	-- Player configs
-	player = {posX=100, posY=100, width = 32, height = 32, vel=5}
+	player = {posX=100, posY=100, width = 64, height = 64, vel=5}
 end
 
 function love.draw()

@@ -14,7 +14,9 @@ function window_state()
 		love.timer.sleep(next_time - cur_time)	
 		
 		-- Drawing stuff
+		love.graphics.setColor(255, 50, 50)
 		love.graphics.rectangle( "fill", player.posX, player.posY, player.width, player.height)
+		love.graphics.setColor(255, 255, 255)
 		balls_factory()
 	end
 end

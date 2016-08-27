@@ -2,17 +2,21 @@ ball_ID = 0
 balls = {}
 
 function balls_factory()
-	if ball_ID < 20 then
-		balls[ball_ID] ={posX=math.random(0, 800), posY=math.random(0, 600), width=32, height=32,  vel=2, ang = math.random(0, 180)}
+	-- Creatinf all balls
+	if ball_ID < 10 then
+		balls[ball_ID] = {posX=-32, posY=math.random(0, 600), width=64, height=64,  vel= math.random(2, 4),
+		 ang = math.random(-math.pi/3, math.pi/3)}
 		ball_ID = ball_ID + 1
 	end
 
 	for i = 0 , ball_ID-1 do
 		if balls[i] ~= nil then
-
+			-- Delete balls out of the screen
 			if balls[i].posX < -balls[i].width or balls[i].posX > 800+balls[i].width or
 			 balls[i].posY < -balls[i].height or balls[i].posY > 800+balls[i].height then
-				table.remove(balls, i)
+				--table.remove(balls, i)
+				balls[i] = {posX=-32, posY=math.random(0, 600), width=64, height=64,  vel= math.random(2, 4),
+				 ang = math.random(-math.pi/3, math.pi/3)}
 			else
 				love.graphics.rectangle( "fill", balls[i].posX, balls[i].posY, balls[i].width, balls[i].height)
 			end
