@@ -23,7 +23,6 @@ end
 
 
 function window_game()
-	love.graphics.rectangle( "fill", 100, 100, 16, 16)
 	-- Timer management
 	local cur_time = love.timer.getTime()
 	if next_time <= cur_time then
@@ -65,7 +64,7 @@ function love.update(dt)
 end
 
 function readKeyboard()
-	    if love.keyboard.isDown('up')    then player.posY = player.posY - player.vel
+	if love.keyboard.isDown('up')    then player.posY = player.posY - player.vel
 	elseif love.keyboard.isDown('down')  then player.posY = player.posY + player.vel
 	elseif love.keyboard.isDown('left')  then player.posX = player.posX - player.vel
 	elseif love.keyboard.isDown('right') then player.posX = player.posX + player.vel
