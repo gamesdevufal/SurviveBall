@@ -1,30 +1,23 @@
---[[
-function love.keypressed(k)
-	if k == "up" then
-		print ("up!")
-	end
-end
-]]
-
-
 --WindowID = 0 -> tela inicial, WindowID=2 -> tela de jogo 
 
 require 'window_initial'
 require 'window_game'
 
-windowID = 0
+game_state = 0
+a = true
 
-
--- na versao 0.10 love.mousepressed( x, y, button, istouch )
+--Na versao 0.10 love.mousepressed( x, y, button, istouch )
 --Get mouse event
 function love.mousepressed( x, y, button )
-	if windowID == 0 then
+	if game_state == 0 then
 		treat_mouse_0( x, y, button )
 	end
 end	
 
 function love.load()
+	-- Set window proprieties
 	love.window.setMode(800, 600, {resizable=false})
+	love.window.setTitle("Survive Game v1.0")
 	
 	-- Timer configs
 	fps    = 60		-- Using 60 frames per second
@@ -32,12 +25,12 @@ function love.load()
 	next_time = love.timer.getTime()
 
 	-- Player configs
-	player = {posX=100, posY=100, vel=5}
+	player = {posX=100, posY=100, width = 32, height = 32, vel=5}
 end
 
 function love.draw()
 	-- Ask which is the current game state
-	if windowID == 1 then
+	if game_state == 1 then
 		window_game()
 	else
 		window_initial()
@@ -52,5 +45,3 @@ function love.update(dt)
 	-- Updating all the rest
 	treat_keyboard_1()
 end
-
-
