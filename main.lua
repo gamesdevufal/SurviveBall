@@ -37,4 +37,5 @@ function love.update(dt)
 	-- Updating all the rest
 	treat_keyboard()
 	balls_move()
+
 end
