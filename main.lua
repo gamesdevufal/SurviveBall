@@ -30,7 +30,8 @@ function love.load()
 	floorScreen = love.graphics.newImage('media/floor.jpg')
 	ballImage  = love.graphics.newImage('media/Bola.png')
 	gameOverImage  = love.graphics.newImage('media/gameOver2.png')
-
+	game_state = 0
+	
 	heroImage  = love.graphics.newImage('media/people.png')
 
 	local g = anim8.newGrid(64, 64, heroImage:getWidth(), heroImage:getHeight())
@@ -62,7 +63,7 @@ function love.load()
 	bgSongEnd	= love.audio.newSource("media/gameOver.ogg")	
 	songLiveLost = love.audio.newSource("media/liveLost1.ogg")
 	songTenScore = love.audio.newSource("media/score.ogg")
-	flagBgSong = 3
+	flagBgSong = 0
 	flagLiveSong = 0
 	flagTenScore = 0
 end

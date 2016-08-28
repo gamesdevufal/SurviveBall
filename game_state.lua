@@ -42,6 +42,8 @@ function window_state()
 	elseif game_state == 2 then
 		flagBgSong = 3
 		love.graphics.draw(gameOverImage, 0, 0)
+		love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 36)
+		love.graphics.print("FINAL SCORE: "..tostring(score), 250, 500)
 	end
 	
 	
@@ -95,9 +97,10 @@ function treat_keyboard()
 	
 	elseif game_state == 2 then
 		if love.keyboard.isDown('return') or love.keyboard.isDown(' ') then
+			bgSongEnd:stop() 
 			love.load()
 
-			game_state = 1
+			
 		end
 	end
 
