@@ -37,6 +37,7 @@ function balls_move()
 end
 
 function create_ball(index)
+	-- Draw where the ball will born
 	position = math.random(0, 4)
 	if position == 0 then -- ball from upside
 		balls[index] = {posX = math.random(0, 800), posY = -64, width = 64, height = 64,  vel = math.random(2, 3),
