@@ -24,7 +24,7 @@ function love.load()
 	-- Game configs
 	initScreen = love.graphics.newImage('media/Inicio.png')
 	floorScreen = love.graphics.newImage('media/floor.jpg')
-	ballImage  = love.graphics.newImage('media/bola.png')
+	ballImage  = love.graphics.newImage('media/Bola.png')
 	score = 0
 	
 	-- Player configs
