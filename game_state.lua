@@ -22,7 +22,8 @@ function window_state()
 
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
-		love.graphics.print("Lives left: "..tostring(lives), 10, 20)
+		love.graphics.print("Level: "..tostring(level), 10, 20)
+		love.graphics.print("Lives left: "..tostring(lives), 10, 30)
 		love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
 		
 		animations[player.direction]:draw(heroImage, player.posX, player.posY)
@@ -66,7 +67,8 @@ function treat_keyboard()
 	
 	elseif game_state == 2 then
 		if love.keyboard.isDown('return') or love.keyboard.isDown(' ') then
-			lives = 3 
+			love.load()
+
 			game_state = 1
 		end
 	end

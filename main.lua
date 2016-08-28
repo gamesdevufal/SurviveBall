@@ -39,7 +39,12 @@ function love.load()
 	animations = {animation_down, animation_left, animation_right, animation_up}
 
 	score = 0
+	level = 1
 	lives = 3
+	ball_ID = 0
+	balls = {}
+	num_ball = 3
+	nextLevel = 5
 	lastCollisionIndex = 0
 	collisionFlag = 1
 	
