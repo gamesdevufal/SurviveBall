@@ -12,7 +12,7 @@ function window_state()
 	if( (score+1)%50 == 0 ) then flagTenScore = 1 end	
 	
 	-- Check if the game is over
-	if lives <= 0 then print("The game is over...") lives = 0 game_state = 3 end
+	if lives <= 0 and game_state~=3 then print("The game is over...") lives = 0 game_state = 3 end
 	
 	if game_state == 0 then
 		--Draw the start button.
