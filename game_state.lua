@@ -14,6 +14,8 @@ function window_state()
 		--love.graphics.rectangle( "fill", 300, 400, 200, 100)
 
 	elseif game_state == 1 then
+		love.graphics.draw(floorScreen, 0, 0)
+
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
 		love.graphics.setColor(255, 50, 50)
