@@ -30,10 +30,12 @@ function balls_move()
 		if balls[i] ~= nil then
 			balls[i].posX = balls[i].posX + balls[i].vel * math.cos(balls[i].ang)
 			balls[i].posY = balls[i].posY + balls[i].vel * math.sin(balls[i].ang)
-
-			detect_collision(i)
+			
+			if collisionFlag==1 then detect_collision(i) end
 		end
+		
 	end
+	collisionFlag = 1
 end
 
 function create_ball(index)
@@ -61,5 +63,10 @@ function detect_collision(index)
 
 	if math.sqrt(distX*distX + distY*distY) < 64 then
 		print ("collision")
+		if lastIndex ~= index then
+			lives = lives - 1
+			lastIndex = index
+			collisionFlag = 0
+		end
 	end
 end

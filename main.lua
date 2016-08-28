@@ -26,6 +26,9 @@ function love.load()
 	floorScreen = love.graphics.newImage('media/floor.jpg')
 	ballImage  = love.graphics.newImage('media/Bola.png')
 	score = 0
+	lives = 3
+	lastCollisionIndex = 0
+	collisionFlag = 1
 	
 	-- Player configs
 	player = {posX=100, posY=100, width = 64, height = 64, vel=5}

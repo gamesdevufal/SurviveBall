@@ -18,6 +18,7 @@ function window_state()
 
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
+		love.graphics.print("Lives left: "..tostring(lives), 10, 20)
 		love.graphics.setColor(255, 50, 50)
 		love.graphics.rectangle( "fill", player.posX, player.posY, player.width, player.height)
 		love.graphics.setColor(255, 255, 255)
