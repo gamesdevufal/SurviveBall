@@ -65,10 +65,15 @@ function treat_keyboard()
 		end
 	
 	elseif game_state == 2 then
-		if love.keyboard.isDown('enter') or love.keyboard.isDown('space') then 
+		if love.keyboard.isDown('return') or love.keyboard.isDown(' ') then
+			lives = 3 
 			game_state = 1
-		elseif love.keyboard.isDown('esc') then
-			love.event.quit()
 		end
 	end
+
+	if love.keyboard.isDown('escape') then
+		love.event.quit()
+	end
+
+
 end
