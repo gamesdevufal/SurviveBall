@@ -43,7 +43,8 @@ function love.load()
 	collisionFlag = 1
 	
 	-- Player configs
-	player = {posX=380, posY=280, width = 32, height = 48, vel=5, direction = 1}
+	player = {posX=380, posY=280, width = 64, height = 64, vel=5, direction = 1}
+	collision_rect = {posX = player.posX+15, posY = player.posY+20, width = player.width-26, height = player.height-26}
 end
 
 function love.draw()

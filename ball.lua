@@ -58,11 +58,21 @@ end
 
 function detect_collision(index)
 	-- See if the player was cought
-	distX = (balls[index].posX+32) - (player.posX+32)
-	distY = (balls[index].posY+32) - (player.posY+32)
+	originX = (balls[index].posX+32)
+	originY = (balls[index].posY+32)
 
-	if math.sqrt(distX*distX + distY*distY) < 64 then
-		print ("collision")
+	if math.sqrt( (originX-(collision_rect.posX))*(originX-(collision_rect.posX)) + 
+		(originY-(collision_rect.posY))*(originY-(collision_rect.posY)) ) < 32 or
+		 
+		 math.sqrt( (originX-(collision_rect.posX+collision_rect.width))*(originX-(collision_rect.posX+collision_rect.width)) +
+		  (originY-(collision_rect.posY))*(originY-(collision_rect.posY)) ) < 32 or
+		 
+		 math.sqrt( (originX-(collision_rect.posX))*(originX-(collision_rect.posX)) + 
+		 	(originY-(collision_rect.posY+collision_rect.height))*(originY-(collision_rect.posY+collision_rect.height)) ) < 32 or 
+		 
+		 math.sqrt( (originX-(collision_rect.posX+collision_rect.width))*(originX-(collision_rect.posX+collision_rect.width)) +
+		 	(originY-(collision_rect.posY+collision_rect.height))*(originY-(collision_rect.posY+collision_rect.height)) ) < 32 then
+		print ("collision leftup")
 		if lastIndex ~= index then
 			lives = lives - 1
 			lastIndex = index
