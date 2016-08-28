@@ -1,12 +1,5 @@
 
 function window_state()
-	-- Timer management
-	--local cur_time = love.timer.getTime()
-	--if next_time <= cur_time then
-	--	next_time = cur_time
-	--	return
-	--end
-	--love.timer.sleep(next_time - cur_time)	
 		
 	if game_state == 0 then
 		--Draw the start button.
@@ -17,12 +10,13 @@ function window_state()
 	elseif game_state == 1 then
 		love.graphics.draw(floorScreen, 0, 0)
 
+		-- See if the player lose
 		if lives == 0 then
 			game_state = 2
 		end
 
-		love.graphics.setColor(153, 0, 0)
 		-- Drawing stuff
+		love.graphics.setColor(153, 0, 0)
 		love.graphics.print("Score: "..tostring(score), 10, 10)
 		love.graphics.print("Level: "..tostring(level), 10, 30)
 		love.graphics.print("Lives left: "..tostring(lives), 10, 50)
@@ -33,21 +27,20 @@ function window_state()
 		end
 		love.graphics.setColor(255, 255, 255)
 		--love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
-		
 		animations[player.direction]:draw(heroImage, player.posX, player.posY)
 		balls_factory()
+
+		--set music
 		flagBgSong = 2
 
 
 	elseif game_state == 2 then
+		-- Show tha game over screen
 		flagBgSong = 3
 		love.graphics.draw(gameOverImage, 0, 0)
 		love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 36)
 		love.graphics.print("FINAL SCORE: "..tostring(score), 250, 500)
 	end
-	
-	
-	
 end
 
 function treat_mouse( x, y )
@@ -71,10 +64,12 @@ function treat_keyboard()
 			love.timer.sleep(0.5)
 		end
 
+		-- For dont't read the keyboard event if it's paused
 		if paused then
 			return
 		end
 
+		-- Set movement by key down
 		if love.keyboard.isDown('up') and player.posY > 0 then 
 			player.posY = player.posY - player.vel
 			collision_rect.posY = player.posY + 20
@@ -96,17 +91,16 @@ function treat_keyboard()
 		end
 	
 	elseif game_state == 2 then
+		-- Restart the game if enter or space is pressed.
 		if love.keyboard.isDown('return') or love.keyboard.isDown('space') then
 			bgSongEnd:stop() 
-			love.load()
-
-			
+			love.load()	
 		end
 	end
 
+	-- Quit if press 'esc' 
 	if love.keyboard.isDown('escape') then
 		love.event.quit()
 	end
-
 
 end

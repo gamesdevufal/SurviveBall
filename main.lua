@@ -1,46 +1,48 @@
-
+--[[
+	Game Name: SurviveBall
+	version: 1.0
+	Created: 27/08/2016
+	Authors : Bruno Gabriel Cavalcante Lima (https://github.com/bglima)
+	          Felipe Emídio Esteves da Silva (https://github.com/felipeemidio)
+]]
 
 require 'game_state'
 require 'ball'
 local anim8 = require 'anim8'
 
+--Variable that define which screen should appear
 game_state = 0
-
---Na versao 0.10 love.mousepressed( x, y, button, istouch )
---Get mouse event
-function love.mousepressed()
-	treat_mouse(love.mouse.getX(), love.mouse.getY())
-end	
 
 function love.load()
 	-- Set window proprieties
 	love.window.setMode(800, 600, {resizable=false})
 	love.window.setTitle("Survive Game v1.0")
+
+	-- Conf new font
+	love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 18)
 	
 	-- Timer configs
 	fps    = 60		-- Using 60 frames per second
 	min_dt = 1/fps
 	next_time = love.timer.getTime()
 
-	love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 18)
-
-
-	-- Game configs
+	-- Get images
 	initScreen = love.graphics.newImage('media/Inicio.png')
 	floorScreen = love.graphics.newImage('media/floor.jpg')
 	ballImage  = love.graphics.newImage('media/Bola.png')
 	gameOverImage  = love.graphics.newImage('media/gameOver2.png')
 	game_state = 0
-	
 	heroImage  = love.graphics.newImage('media/people.png')
 
+	-- Get animations
 	local g = anim8.newGrid(64, 64, heroImage:getWidth(), heroImage:getHeight())
 	animation_down = anim8.newAnimation( g('4-6', 1), 0.1)
 	animation_left = anim8.newAnimation( g('4-6', 2), 0.1)
 	animation_right = anim8.newAnimation( g('4-6', 3), 0.1)
 	animation_up = anim8.newAnimation( g('4-6', 4), 0.1)
-
 	animations = {animation_down, animation_left, animation_right, animation_up}
+
+	-- Set game variables
 	score = 0
 	level = 1
 	lives = 3
@@ -68,25 +70,6 @@ function love.load()
 	flagTenScore = 0
 end
 
-function playSound()
-	if flagBgSong ~= 0 then
-		if flagBgSong == 1 then bgSongIntro:play() bgSongPlay:stop() bgSongEnd:stop()
-		elseif flagBgSong == 2 then bgSongIntro:stop() bgSongPlay:play() bgSongEnd:stop() 
-		elseif flagBgSong == 3 then bgSongIntro:stop() bgSongPlay:stop() bgSongEnd:play() end
-		flagBgSong = 0
-	end	
-	
-	if flagLiveSong ~= 0 then
-		love.audio.play(songLiveLost)
-		flagLiveSong = 0
-	end
-	
-	if flagTenScore ~= 0 then
-		love.audio.play(songTenScore)
-		flagTenScore = 0
-	end
-end
-
 function love.draw()
 	-- Ask which is the current game state
 	window_state()
@@ -108,4 +91,33 @@ function love.update(dt)
 
 	treat_keyboard()
 
+end
+
+--On version 0.10 love.mousepressed( x, y, button, istouch )
+--Get mouse event
+function love.mousepressed()
+	treat_mouse(love.mouse.getX(), love.mouse.getY())
+end	
+
+function playSound()
+	-- Set the music by game stage
+	if flagBgSong ~= 0 then
+		if flagBgSong == 1 then bgSongIntro:play() bgSongPlay:stop() bgSongEnd:stop()
+		elseif flagBgSong == 2 then bgSongIntro:stop() bgSongPlay:play() bgSongEnd:stop() 
+		elseif flagBgSong == 3 then bgSongIntro:stop() bgSongPlay:stop() bgSongEnd:play() end
+		
+		flagBgSong = 0
+	end	
+	
+	-- Set sound if the player was hit
+	if flagLiveSong ~= 0 then
+		love.audio.play(songLiveLost)
+		flagLiveSong = 0
+	end
+	
+	-- Set the song if the player level up
+	if flagTenScore ~= 0 then
+		love.audio.play(songTenScore)
+		flagTenScore = 0
+	end
 end
