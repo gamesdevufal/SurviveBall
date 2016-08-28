@@ -29,7 +29,7 @@ function love.load()
 	initScreen = love.graphics.newImage('media/Inicio.png')
 	floorScreen = love.graphics.newImage('media/floor.jpg')
 	ballImage  = love.graphics.newImage('media/Bola.png')
-	gameOverImage  = love.graphics.newImage('media/gameOver.png')
+	gameOverImage  = love.graphics.newImage('media/gameOver2.png')
 
 	heroImage  = love.graphics.newImage('media/people.png')
 
