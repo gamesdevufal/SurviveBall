@@ -51,6 +51,7 @@ function love.load()
 	lastCollisionIndex = 0
 	collisionFlag = 1
 	walking = false
+	paused = false
 	
 	-- Player configs
 	player = {posX=380, posY=280, width = 64, height = 64, vel=5, direction = 1}
@@ -62,15 +63,17 @@ function love.draw()
 	window_state()
 end
 
-function love.update(dt) 
-	-- Updating time
+function love.update(dt)
 	next_time = next_time + min_dt
-
-	if walking then
-		animations[player.direction]:update(dt)
+	if not paused then 
+		-- Updating time
+		if walking then
+			animations[player.direction]:update(dt)
+		end
+		-- Updating all the rest
+		
+		balls_move()
 	end
-	-- Updating all the rest
 	treat_keyboard()
-	balls_move()
 
 end

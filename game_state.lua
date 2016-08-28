@@ -25,6 +25,11 @@ function window_state()
 		love.graphics.print("Score: "..tostring(score), 10, 10)
 		love.graphics.print("Level: "..tostring(level), 10, 30)
 		love.graphics.print("Lives left: "..tostring(lives), 10, 50)
+		if paused then
+			love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 36)
+			love.graphics.print("PAUSED ", 350, 280)
+			love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 18)
+		end
 		love.graphics.setColor(255, 255, 255)
 		--love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
 		
@@ -50,6 +55,17 @@ function treat_keyboard()
 	if game_state == 1 then
 		-- Moving the hero
 		walking = true
+
+		if love.keyboard.isDown('p') then
+			--love.graphics.print("Paused Game: ", 350, 280)
+			paused = not paused
+			love.timer.sleep(0.5)
+		end
+
+		if paused then
+			return
+		end
+
 		if love.keyboard.isDown('up') and player.posY > 0 then 
 			player.posY = player.posY - player.vel
 			collision_rect.posY = player.posY + 20
