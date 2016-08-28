@@ -22,7 +22,7 @@ function love.load()
 	min_dt = 1/fps
 	next_time = love.timer.getTime()
 
-	love.graphics.setNewFont("fff/FFF_Tusj.ttf", 18)
+	love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 18)
 
 
 	-- Game configs
