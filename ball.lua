@@ -14,6 +14,7 @@ function balls_factory()
 			if balls[i].posX < -balls[i].width or balls[i].posX > 800+balls[i].width or
 			 balls[i].posY < -balls[i].height or balls[i].posY > 800+balls[i].height then
 				--table.remove(balls, i)
+				score = score + 1
 				create_ball(i)
 			else
 				love.graphics.draw(ballImage, balls[i].posX, balls[i].posY)
