@@ -16,6 +16,10 @@ function window_state()
 	elseif game_state == 1 then
 		love.graphics.draw(floorScreen, 0, 0)
 
+		if lives == 0 then
+			game_state = 2
+		end
+
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
 		love.graphics.print("Lives left: "..tostring(lives), 10, 20)
@@ -24,8 +28,8 @@ function window_state()
 		animations[player.direction]:draw(heroImage, player.posX, player.posY)
 		balls_factory()
 
-	elseif game_state == 3 then
-
+	elseif game_state == 2 then
+		love.graphics.draw(gameOverImage, 0, 0)
 	end
 end
 
@@ -58,6 +62,13 @@ function treat_keyboard()
 			player.posX = player.posX + player.vel
 			collision_rect.posX = player.posX + 15
 			player.direction = 3
+		end
+	
+	elseif game_state == 2 then
+		if love.keyboard.isDown('enter') or love.keyboard.isDown('space') then 
+			game_state = 1
+		elseif love.keyboard.isDown('esc') then
+			love.event.quit()
 		end
 	end
 end
