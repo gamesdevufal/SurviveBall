@@ -1,19 +1,13 @@
 
 function window_state()
 	-- Timer management
-	local cur_time = love.timer.getTime()
-	if next_time <= cur_time then
-		next_time = cur_time
-		return
-	end
-	love.timer.sleep(next_time - cur_time)	
-	
-	-- Sound that plays each 50 points scored
-	if( (score+1)%50 == 0 ) then flagTenScore = 1 end	
-	
-	-- Check if the game is over
-	if lives <= 0 and game_state~=3 then print("The game is over...") lives = 0 game_state = 3 end
-	
+	--local cur_time = love.timer.getTime()
+	--if next_time <= cur_time then
+	--	next_time = cur_time
+	--	return
+	--end
+	--love.timer.sleep(next_time - cur_time)	
+		
 	if game_state == 0 then
 		--Draw the start button.
 		love.graphics.draw(initScreen, 0, 0)
@@ -23,17 +17,31 @@ function window_state()
 	elseif game_state == 1 then
 		love.graphics.draw(floorScreen, 0, 0)
 
+		if lives == 0 then
+			game_state = 2
+		end
+
+		love.graphics.setColor(153, 0, 0)
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
-		love.graphics.print("Lives left: "..tostring(lives), 10, 20)
-		love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
+		love.graphics.print("Level: "..tostring(level), 10, 30)
+		love.graphics.print("Lives left: "..tostring(lives), 10, 50)
+		if paused then
+			love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 36)
+			love.graphics.print("PAUSED ", 350, 280)
+			love.graphics.setNewFont("fonts/FFF_Tusj.ttf", 18)
+		end
+		love.graphics.setColor(255, 255, 255)
+		--love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
 		
 		animations[player.direction]:draw(heroImage, player.posX, player.posY)
 		balls_factory()
 		flagBgSong = 2
-	elseif game_state == 3 then
-		flagBgSong = 3
 
+
+	elseif game_state == 2 then
+		flagBgSong = 3
+		love.graphics.draw(gameOverImage, 0, 0)
 	end
 	
 	
@@ -53,6 +61,18 @@ end
 function treat_keyboard()
 	if game_state == 1 then
 		-- Moving the hero
+		walking = true
+
+		if love.keyboard.isDown('p') then
+			--love.graphics.print("Paused Game: ", 350, 280)
+			paused = not paused
+			love.timer.sleep(0.5)
+		end
+
+		if paused then
+			return
+		end
+
 		if love.keyboard.isDown('up') and player.posY > 0 then 
 			player.posY = player.posY - player.vel
 			collision_rect.posY = player.posY + 20
@@ -69,6 +89,21 @@ function treat_keyboard()
 			player.posX = player.posX + player.vel
 			collision_rect.posX = player.posX + 15
 			player.direction = 3
+		else
+			walking = false
+		end
+	
+	elseif game_state == 2 then
+		if love.keyboard.isDown('return') or love.keyboard.isDown(' ') then
+			love.load()
+
+			game_state = 1
 		end
 	end
+
+	if love.keyboard.isDown('escape') then
+		love.event.quit()
+	end
+
+
 end

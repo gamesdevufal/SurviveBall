@@ -1,9 +1,7 @@
-ball_ID = 0
-balls = {}
 
 function balls_factory()
 	-- Creatinf all balls
-	if ball_ID < 10 then
+	if ball_ID < num_ball then
 		create_ball(ball_ID)
 		ball_ID = ball_ID + 1
 	end
@@ -16,6 +14,12 @@ function balls_factory()
 				--table.remove(balls, i)
 				create_ball(i)
 				score = score + 1
+
+				if score >= nextLevel then
+					nextLevel = nextLevel + 5
+					level = level + 1
+					num_ball = num_ball+1
+				end
 			else
 				love.graphics.draw(ballImage, balls[i].posX, balls[i].posY)
 				--love.graphics.rectangle( "fill", balls[i].posX, balls[i].posY, balls[i].width, balls[i].height)
@@ -73,10 +77,11 @@ function detect_collision(index)
 		 
 		 math.sqrt( (originX-(collision_rect.posX+collision_rect.width))*(originX-(collision_rect.posX+collision_rect.width)) +
 		 	(originY-(collision_rect.posY+collision_rect.height))*(originY-(collision_rect.posY+collision_rect.height)) ) < 32 then
-		print ("collision leftup")
+
+		print ("collision")
 
 		flagLiveSong = 1
-		print ("collision")
+
 		if lastIndex ~= index then
 			lives = lives - 1
 			lastIndex = index
