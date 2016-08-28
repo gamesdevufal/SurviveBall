@@ -2,7 +2,8 @@
 function window_state()
 	if game_state == 0 then
 		--Draw the start button.
-		love.graphics.rectangle( "fill", 300, 400, 200, 100)
+		love.graphics.draw(initScreen, 0, 0)
+		--love.graphics.rectangle( "fill", 300, 400, 200, 100)
 
 	elseif game_state == 1 then
 			-- Timer management
@@ -24,7 +25,7 @@ end
 function treat_mouse( x, y )
 	if game_state == 0 then
 		--See if the start button was clicked.
-		if 300 < x and x < 500 and 400 < y and y < 500 then
+		if 365 < x and x < 475 and 510 < y and y < 565 then
 			print("Star button clicked")
 			game_state = 1
 		end

@@ -21,6 +21,10 @@ function love.load()
 	min_dt = 1/fps
 	next_time = love.timer.getTime()
 
+	-- Game configs
+	initScreen = love.graphics.newImage('media/Inicio.png')
+	ballImage  = love.graphics.newImage('media/bola.png')
+	
 	-- Player configs
 	player = {posX=100, posY=100, width = 64, height = 64, vel=5}
 end

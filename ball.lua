@@ -16,7 +16,8 @@ function balls_factory()
 				--table.remove(balls, i)
 				create_ball(i)
 			else
-				love.graphics.rectangle( "fill", balls[i].posX, balls[i].posY, balls[i].width, balls[i].height)
+				love.graphics.draw(ballImage, balls[i].posX, balls[i].posY)
+				--love.graphics.rectangle( "fill", balls[i].posX, balls[i].posY, balls[i].width, balls[i].height)
 			end
 
 		end
