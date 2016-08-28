@@ -96,7 +96,7 @@ function treat_keyboard()
 		end
 	
 	elseif game_state == 2 then
-		if love.keyboard.isDown('return') or love.keyboard.isDown(' ') then
+		if love.keyboard.isDown('return') or love.keyboard.isDown('space') then
 			bgSongEnd:stop() 
 			love.load()
 
