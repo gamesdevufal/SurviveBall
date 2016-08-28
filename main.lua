@@ -43,6 +43,7 @@ function love.load()
 	
 	-- Player configs
 	player = {posX=380, posY=280, width = 32, height = 48, vel=5, direction = 1}
+	collision_rect = {posX = player.posX+15, posY = player.posY+20, width = player.width-26, height = player.height-26}
 	
 	-- Sound settings
 	bgSongIntro = love.audio.newSource("media/intro.mp3")
