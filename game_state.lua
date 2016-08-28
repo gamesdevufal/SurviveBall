@@ -7,12 +7,19 @@ function window_state()
 		return
 	end
 	love.timer.sleep(next_time - cur_time)	
-		
+	
+	-- Sound that plays each 50 points scored
+	if( (score+1)%50 == 0 ) then flagTenScore = 1 end	
+	
+	-- Check if the game is over
+	if lives <= 0 then print("The game is over...") lives = 0 game_state = 3 end
+	
 	if game_state == 0 then
 		--Draw the start button.
 		love.graphics.draw(initScreen, 0, 0)
-		--love.graphics.rectangle( "fill", 300, 400, 200, 100)
-
+		--love.graphics.rectangle( "fill", 300, 400, 200, 100)\
+		flagBgSong = 1
+		
 	elseif game_state == 1 then
 		love.graphics.draw(floorScreen, 0, 0)
 
@@ -24,10 +31,14 @@ function window_state()
 		--love.graphics.rectangle( "fill", player.posX, player.posY, player.width, player.height)
 		love.graphics.setColor(255, 255, 255)
 		balls_factory()
-
+		flagBgSong = 2
 	elseif game_state == 3 then
+		flagBgSong = 3
 
 	end
+	
+	
+	
 end
 
 function treat_mouse( x, y )

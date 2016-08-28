@@ -15,6 +15,7 @@ function balls_factory()
 			 balls[i].posY < -balls[i].height or balls[i].posY > 800+balls[i].height then
 				--table.remove(balls, i)
 				create_ball(i)
+				score = score + 1
 			else
 				love.graphics.draw(ballImage, balls[i].posX, balls[i].posY)
 				--love.graphics.rectangle( "fill", balls[i].posX, balls[i].posY, balls[i].width, balls[i].height)
@@ -62,11 +63,14 @@ function detect_collision(index)
 	distY = (balls[index].posY+32) - (player.posY+32)
 
 	if math.sqrt(distX*distX + distY*distY) < 64 then
+		flagLiveSong = 1
 		print ("collision")
 		if lastIndex ~= index then
 			lives = lives - 1
 			lastIndex = index
 			collisionFlag = 0
+			player.posX = 400
+			player.posY = 300
 		end
 	end
 end

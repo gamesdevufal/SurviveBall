@@ -36,7 +36,6 @@ function love.load()
 	animation_up = anim8.newAnimation( g('4-6', 4), 0.2)
 
 	animations = {animation_down, animation_left, animation_right, animation_up}
-
 	score = 0
 	lives = 3
 	lastCollisionIndex = 0
@@ -44,6 +43,35 @@ function love.load()
 	
 	-- Player configs
 	player = {posX=380, posY=280, width = 32, height = 48, vel=5, direction = 1}
+	
+	-- Sound settings
+	bgSongIntro = love.audio.newSource("media/intro.mp3")
+	bgSongPlay  = love.audio.newSource("media/playing.mp3")
+	bgSongEnd	= love.audio.newSource("media/gameOver.mp3")
+	songLiveLost = love.audio.newSource("media/liveLost1.mp3")
+	songTenScore = love.audio.newSource("media/score.mp3")
+	flagBgSong = 0
+	flagLiveSong = 0
+	flagTenScore = 0
+end
+
+function playSound()
+	if flagBgSong ~= 0 then
+		if flagBgSong == 1 then bgSongIntro:play() bgSongPlay:stop() bgSongEnd:stop()
+		elseif flagBgSong == 2 then bgSongIntro:stop() bgSongPlay:play() bgSongEnd:stop()
+		elseif flagBgSong == 3 then bgSongIntro:stop() bgSongPlay:stop() bgSongEnd:play() end
+		flagBgSong = 0
+	end	
+	
+	if flagLiveSong ~= 0 then
+		love.audio.play(songLiveLost)
+		flagLiveSong = 0
+	end
+	
+	if flagTenScore ~= 0 then
+		love.audio.play(songTenScore)
+		flagTenScore = 0
+	end
 end
 
 function love.draw()
@@ -55,7 +83,11 @@ function love.update(dt)
 	-- Updating time
 	next_time = next_time + min_dt
 
+	-- Animations
 	animations[player.direction]:update(dt)
+	
+	-- Sound
+	playSound()
 	
 	-- Updating all the rest
 	treat_keyboard()
