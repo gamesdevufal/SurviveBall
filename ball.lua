@@ -14,7 +14,6 @@ function balls_factory()
 			if balls[i].posX < -balls[i].width or balls[i].posX > 800+balls[i].width or
 			 balls[i].posY < -balls[i].height or balls[i].posY > 800+balls[i].height then
 				--table.remove(balls, i)
-				score = score + 1
 				create_ball(i)
 			else
 				love.graphics.draw(ballImage, balls[i].posX, balls[i].posY)
@@ -57,7 +56,10 @@ end
 
 function detect_collision(index)
 	-- See if the player was cought
-	if math.abs(balls[index].posX - player.posX) < 64 and math.abs(balls[index].posY - player.posY) < 64 then
+	distX = (balls[index].posX+32) - (player.posX+32)
+	distY = (balls[index].posY+32) - (player.posY+32)
+
+	if math.sqrt(distX*distX + distY*distY) < 64 then
 		print ("collision")
 	end
 end
