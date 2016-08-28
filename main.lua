@@ -29,7 +29,7 @@ function love.load()
 
 	heroImage  = love.graphics.newImage('media/people.png')
 
-	local g = anim8.newGrid(32, 48, heroImage:getWidth(), heroImage:getHeight())
+	local g = anim8.newGrid(64, 64, heroImage:getWidth(), heroImage:getHeight())
 	animation_down = anim8.newAnimation( g('4-6', 1), 0.2)
 	animation_left = anim8.newAnimation( g('4-6', 2), 0.2)
 	animation_right = anim8.newAnimation( g('4-6', 3), 0.2)
