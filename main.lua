@@ -64,7 +64,7 @@ function love.draw()
 end
 
 function love.update(dt)
-	next_time = next_time + min_dt
+	--next_time = next_time + min_dt
 	if not paused then 
 		-- Updating time
 		if walking then

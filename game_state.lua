@@ -1,12 +1,12 @@
 
 function window_state()
 	-- Timer management
-	local cur_time = love.timer.getTime()
-	if next_time <= cur_time then
-		next_time = cur_time
-		return
-	end
-	love.timer.sleep(next_time - cur_time)	
+	--local cur_time = love.timer.getTime()
+	--if next_time <= cur_time then
+	--	next_time = cur_time
+	--	return
+	--end
+	--love.timer.sleep(next_time - cur_time)	
 		
 	if game_state == 0 then
 		--Draw the start button.
