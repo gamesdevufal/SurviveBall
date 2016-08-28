@@ -20,11 +20,13 @@ function window_state()
 			game_state = 2
 		end
 
+		love.graphics.setColor(153, 0, 0)
 		-- Drawing stuff
 		love.graphics.print("Score: "..tostring(score), 10, 10)
-		love.graphics.print("Level: "..tostring(level), 10, 20)
-		love.graphics.print("Lives left: "..tostring(lives), 10, 30)
-		love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
+		love.graphics.print("Level: "..tostring(level), 10, 30)
+		love.graphics.print("Lives left: "..tostring(lives), 10, 50)
+		love.graphics.setColor(255, 255, 255)
+		--love.graphics.rectangle( "fill", collision_rect.posX, collision_rect.posY, collision_rect.width, collision_rect.height)
 		
 		animations[player.direction]:draw(heroImage, player.posX, player.posY)
 		balls_factory()
@@ -47,6 +49,7 @@ end
 function treat_keyboard()
 	if game_state == 1 then
 		-- Moving the hero
+		walking = true
 		if love.keyboard.isDown('up') and player.posY > 0 then 
 			player.posY = player.posY - player.vel
 			collision_rect.posY = player.posY + 20
@@ -63,6 +66,8 @@ function treat_keyboard()
 			player.posX = player.posX + player.vel
 			collision_rect.posX = player.posX + 15
 			player.direction = 3
+		else
+			walking = false
 		end
 	
 	elseif game_state == 2 then

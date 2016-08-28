@@ -77,7 +77,7 @@ function detect_collision(index)
 		 
 		 math.sqrt( (originX-(collision_rect.posX+collision_rect.width))*(originX-(collision_rect.posX+collision_rect.width)) +
 		 	(originY-(collision_rect.posY+collision_rect.height))*(originY-(collision_rect.posY+collision_rect.height)) ) < 32 then
-		print ("collision leftup")
+		print ("collision")
 		if lastIndex ~= index then
 			lives = lives - 1
 			lastIndex = index
